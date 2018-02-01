@@ -1,0 +1,5 @@
+syntax: glob
+LibraryTests/BenchmarkDotNet.Artifacts
+LibraryTests/bin/
+LibraryTests/obj/
+.vs/
