@@ -4,13 +4,17 @@ using System.Text;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, RankColumn]
     public class StringConcatTests
     {
+        [Params(100, 1000, 10000, 100000)]
+        public int Count { get; set; }
+
         [Benchmark(Description = "char list concat")]
         public string CharConcat()
         {
             List<char> Builder = new List<char>();
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 Builder.Add('A');
                 Builder.Add('S');
@@ -24,7 +28,7 @@ namespace LibraryTests.Tests
         public string StringBuilder()
         {
             StringBuilder Builder = new System.Text.StringBuilder();
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 Builder.Append("ASDF");
             }
@@ -35,7 +39,7 @@ namespace LibraryTests.Tests
         public string StringConcat()
         {
             string Builder = "";
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 Builder += "ASDF";
             }

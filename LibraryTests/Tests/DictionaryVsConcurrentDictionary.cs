@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser]
     public class DictionaryVsConcurrentDictionary
     {
         [Benchmark(Description = "ConcurrentDictionary<string,string>")]
