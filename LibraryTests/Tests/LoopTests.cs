@@ -2,6 +2,7 @@
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class LoopTests
     {
         public int[] TestData = new int[10000];

@@ -4,6 +4,7 @@ using System.IO;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class MemoryStreamVsRecyclableMemoryStream
     {
         private byte[] Buffer;

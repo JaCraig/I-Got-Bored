@@ -2,6 +2,7 @@
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class PatternMatchingTests
     {
         [Benchmark(Description = "As")]

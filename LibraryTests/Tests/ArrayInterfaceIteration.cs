@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class ArrayInterfaceIteration
     {
         public int[] Data;

@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class IEnumerableConversion
     {
         private IEnumerable<int> Data;

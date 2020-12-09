@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class ArraySortTests
     {
         private int[] Data;

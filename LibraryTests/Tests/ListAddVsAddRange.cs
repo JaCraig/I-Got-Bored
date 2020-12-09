@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class ListAddVsAddRange
     {
         [Params(100, 1000, 10000, 100000, 1000000)]

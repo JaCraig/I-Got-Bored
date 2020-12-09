@@ -3,6 +3,7 @@ using System;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class SpanVsArray
     {
         [Benchmark(Baseline = true, Description = "Array")]

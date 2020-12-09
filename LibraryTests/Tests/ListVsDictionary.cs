@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class ListVsDictionary
     {
         private ArrayList ArrayListData;

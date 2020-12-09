@@ -1,12 +1,22 @@
 ﻿using BenchmarkDotNet.Attributes;
+using Microsoft.Extensions.ObjectPool;
 using System;
 using System.Text;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class StringFormatting
     {
         private readonly DateTime Now = DateTime.Now;
+
+        private ObjectPool<StringBuilder> InternalStringBuilderPool { get; set; }
+
+        [GlobalSetup]
+        public void Setup()
+        {
+            InternalStringBuilderPool = new DefaultObjectPoolProvider().CreateStringBuilderPool();
+        }
 
         [Benchmark(Description = "StringBuilder")]
         public string StringBuilder()
@@ -14,6 +24,16 @@ namespace LibraryTests.Tests
             var sb = new StringBuilder();
             sb.AppendFormat("Today's date is {0:D} and the time is {1:T}", Now, Now);
             return sb.ToString();
+        }
+
+        [Benchmark(Description = "StringBuilderPool")]
+        public string StringBuilderPool()
+        {
+            var sb = InternalStringBuilderPool.Get();
+            sb.AppendFormat("Today's date is {0:D} and the time is {1:T}", Now, Now);
+            var Result = sb.ToString();
+            InternalStringBuilderPool.Return(sb);
+            return Result;
         }
 
         [Benchmark(Description = "string concat")]

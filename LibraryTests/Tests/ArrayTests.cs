@@ -3,12 +3,13 @@ using System;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class ArrayCopyTests
     {
+        private byte[] source, destination;
+
         [Params(100, 1000, 10000)]
         public int Count { get; set; }
-
-        private byte[] source, destination;
 
         [Benchmark(Baseline = true, Description = "Copy using Array.Copy()")]
         public void CopyArray()

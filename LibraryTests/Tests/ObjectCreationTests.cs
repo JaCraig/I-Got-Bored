@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class ObjectCreationTests
     {
         private Func<TestClass> CompiledLambda;

@@ -3,6 +3,7 @@ using System;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class StringSubstring
     {
         [Benchmark(Description = "Span.Slice")]

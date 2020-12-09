@@ -2,6 +2,7 @@
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class DynamicTests
     {
         [Benchmark(Baseline = true, Description = "Dynamic value")]

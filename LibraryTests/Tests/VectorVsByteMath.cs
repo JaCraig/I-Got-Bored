@@ -3,6 +3,7 @@ using System.Numerics;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class VectorVsByteMath
     {
         [Benchmark(Baseline = true, Description = "byte[] test")]

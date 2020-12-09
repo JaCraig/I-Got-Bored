@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class IEnumerableTests
     {
         public IEnumerableTests()

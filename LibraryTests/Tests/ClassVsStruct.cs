@@ -2,6 +2,7 @@
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class ClassVsStructCreation
     {
         [Benchmark(Baseline = true, Description = "Class test")]

@@ -4,6 +4,7 @@ using System.Buffers;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter]
     public class AllocationStrategyTests
     {
         private ColorStruct[] DataPool;

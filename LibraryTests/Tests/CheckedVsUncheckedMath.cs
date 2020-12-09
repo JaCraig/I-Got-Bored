@@ -2,6 +2,7 @@
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class CheckedVsUncheckedMath
     {
         [Benchmark(Baseline = true, Description = "Checked math")]

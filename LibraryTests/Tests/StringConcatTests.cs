@@ -1,14 +1,17 @@
 ﻿using BenchmarkDotNet.Attributes;
+using Microsoft.Extensions.ObjectPool;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LibraryTests.Tests
 {
-    [MemoryDiagnoser, RankColumn]
+    [MemoryDiagnoser, RankColumn, HtmlExporter]
     public class StringConcatTests
     {
         [Params(100, 1000, 10000, 100000)]
         public int Count { get; set; }
+
+        private ObjectPool<StringBuilder> InternalStringBuilderPool { get; set; }
 
         [Benchmark(Description = "char list concat")]
         public string CharConcat()
@@ -24,6 +27,12 @@ namespace LibraryTests.Tests
             return new string(Builder.ToArray());
         }
 
+        [GlobalSetup]
+        public void Setup()
+        {
+            InternalStringBuilderPool = new DefaultObjectPoolProvider().CreateStringBuilderPool();
+        }
+
         [Benchmark(Description = "StringBuilder")]
         public string StringBuilder()
         {
@@ -33,6 +42,19 @@ namespace LibraryTests.Tests
                 Builder.Append("ASDF");
             }
             return Builder.ToString();
+        }
+
+        [Benchmark(Description = "StringBuilderPool")]
+        public string StringBuilderPool()
+        {
+            StringBuilder Builder = InternalStringBuilderPool.Get();
+            for (int x = 0; x < Count; ++x)
+            {
+                Builder.Append("ASDF");
+            }
+            var Result = Builder.ToString();
+            InternalStringBuilderPool.Return(Builder);
+            return Result;
         }
 
         [Benchmark(Description = "string concat", Baseline = true)]

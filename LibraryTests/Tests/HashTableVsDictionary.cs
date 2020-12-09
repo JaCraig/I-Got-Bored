@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class HashTableVsDictionary
     {
         [Benchmark(Description = "Dictionary<int,string>")]

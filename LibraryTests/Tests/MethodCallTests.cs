@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class MethodCallTests
     {
         [Benchmark(Description = "Direct call to method", Baseline = true)]

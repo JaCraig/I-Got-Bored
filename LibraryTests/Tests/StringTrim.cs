@@ -2,6 +2,7 @@
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class StringTrimTests
     {
         [Benchmark(Description = "String substring trim")]

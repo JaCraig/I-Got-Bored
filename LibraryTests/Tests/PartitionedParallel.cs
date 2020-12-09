@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
     public class PartitionedParallel
     {
         private byte[] Data;
