@@ -1,19 +1,28 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 
 namespace LibraryTests.Tests
 {
-    public class ClassVsStructCreation
+    public class ClassVsStructCreation : TestBaseClass
     {
         [Benchmark(Baseline = true, Description = "Class test")]
         public void ClassTest()
         {
-            var Value = new TestClass[10000];
+            var Value = new TestClass[Count];
+            for (var x = 0; x < Count; ++x)
+            {
+                Value[x] = new TestClass();
+            }
         }
 
         [Benchmark(Description = "Struct test")]
         public void StructTest()
         {
-            var Value = new TestStruct[10000];
+            var Value = new TestStruct[Count];
+            for (var x = 0; x < Count; ++x)
+            {
+                Value[x] = new TestStruct();
+            }
         }
 
         private struct TestStruct

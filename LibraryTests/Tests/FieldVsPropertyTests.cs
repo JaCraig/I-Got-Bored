@@ -1,8 +1,9 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 
 namespace LibraryTests.Tests
 {
-    public class FieldVsPropertyTests
+    public class FieldVsPropertyTests : TestBaseClass
     {
         public FieldVsPropertyTests()
         {
@@ -18,7 +19,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Field test")]
         public void FieldTest()
         {
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Value = TestObject.Field + TestObject.Field + TestObject.Field;
             }
@@ -28,7 +29,7 @@ namespace LibraryTests.Tests
         public void LocalTest()
         {
             var Data = 100;
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Value = Data + Data + Data;
             }
@@ -37,7 +38,7 @@ namespace LibraryTests.Tests
         [Benchmark(Baseline = true, Description = "Property test")]
         public void PropertyTest()
         {
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Value = TestObject.Property + TestObject.Property + TestObject.Property;
             }
@@ -45,9 +46,8 @@ namespace LibraryTests.Tests
 
         private class TestClass
         {
-            public int Field;
-
             public int Property { get; set; }
+            public int Field;
         }
     }
 }

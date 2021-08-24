@@ -1,10 +1,11 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 
 namespace LibraryTests.Tests
 {
-    public class LoopTests
+    public class LoopTests : TestBaseClass
     {
-        public int[] TestData = new int[10000];
+        public int[] TestData;
 
         [Benchmark(Description = "Foreach loop", Baseline = true)]
         public void ForEachLoop()
@@ -23,6 +24,12 @@ namespace LibraryTests.Tests
         {
             int Length = TestData.Length;
             for (int x = 0; x < Length; ++x) { }
+        }
+
+        [GlobalSetup]
+        public void Setup()
+        {
+            TestData = new int[Count];
         }
     }
 }

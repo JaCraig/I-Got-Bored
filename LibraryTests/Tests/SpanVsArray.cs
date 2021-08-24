@@ -1,19 +1,20 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System;
 
 namespace LibraryTests.Tests
 {
-    public class SpanVsArray
+    public class SpanVsArray : TestBaseClass
     {
         [Benchmark(Baseline = true, Description = "Array")]
         public unsafe void ArrayTest()
         {
-            int[] Data = new int[10000];
-            for (int y = 0; y < 100; ++y)
+            int[] Data = new int[Count];
+            for (int y = 0; y < Count / 10; ++y)
             {
-                for (int x = 0; x < 100; ++x)
+                for (int x = 0; x < Count / 10; ++x)
                 {
-                    Data[(y * 100) + x] = 1;
+                    Data[(y * (Count / 10)) + x] = 1;
                 }
             }
         }
@@ -21,14 +22,14 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Array With Pointers")]
         public unsafe void ArrayWithPointersTest()
         {
-            int[] Data = new int[10000];
+            int[] Data = new int[Count];
             fixed (int* OriginalPointer = &Data[0])
             {
                 int* Pointer = OriginalPointer;
-                for (int y = 0; y < 100; ++y)
+                for (int y = 0; y < Count / 10; ++y)
                 {
-                    Pointer = OriginalPointer + (y * 100);
-                    for (int x = 0; x < 100; ++x)
+                    Pointer = OriginalPointer + (y * (Count / 10));
+                    for (int x = 0; x < Count / 10; ++x)
                     {
                         *Pointer = 1;
                         ++Pointer;
@@ -40,12 +41,11 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Span")]
         public unsafe void SpanTest()
         {
-            int[] Data = new int[10000];
-            Span<int> Temp = Data;
-            for (int y = 0; y < 100; ++y)
+            Span<int> Temp = new int[Count];
+            for (int y = 0; y < Count / 10; ++y)
             {
-                var YPos = y * 100;
-                for (int x = 0; x < 100; ++x)
+                var YPos = y * Count / 10;
+                for (int x = 0; x < Count; ++x)
                 {
                     Temp[YPos + x] = 1;
                 }
@@ -55,12 +55,11 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Span With Slice")]
         public unsafe void SpanWithSliceTest()
         {
-            int[] Data = new int[10000];
-            Span<int> Temp = Data;
-            for (int y = 0; y < 100; ++y)
+            Span<int> Temp = new int[Count];
+            for (int y = 0; y < Count / 10; ++y)
             {
-                var Slice = Temp.Slice(y * 100, 100);
-                for (int x = 0; x < 100; ++x)
+                var Slice = Temp.Slice(y * (Count / 10), Count / 10);
+                for (int x = 0; x < Count / 10; ++x)
                 {
                     Slice[x] = 1;
                 }

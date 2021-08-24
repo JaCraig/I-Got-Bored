@@ -14,10 +14,10 @@ namespace LibraryTests
         /// </summary>
         public Config()
         {
-            Add(MemoryDiagnoser.Default);
-            Add(BenchmarkDotNet.Validators.JitOptimizationsValidator.DontFailOnError);
-            Add(BenchmarkDotNet.Loggers.ConsoleLogger.Default);
-            Add(BenchmarkDotNet.Exporters.DefaultExporters.Plain);
+            AddDiagnoser(MemoryDiagnoser.Default);
+            AddValidator(BenchmarkDotNet.Validators.JitOptimizationsValidator.DontFailOnError);
+            AddLogger(BenchmarkDotNet.Loggers.ConsoleLogger.Default);
+            AddExporter(BenchmarkDotNet.Exporters.DefaultExporters.Plain);
         }
     }
 }

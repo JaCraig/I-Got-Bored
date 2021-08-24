@@ -1,24 +1,22 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using Microsoft.IO;
 using System.IO;
 
 namespace LibraryTests.Tests
 {
-    public class MemoryStreamVsRecyclableMemoryStream
+    public class MemoryStreamVsRecyclableMemoryStream : TestBaseClass
     {
         private byte[] Buffer;
 
         private RecyclableMemoryStreamManager Manager;
-
-        [Params(100, 1000, 10000, 100000, 1000000)]
-        public int Size { get; set; }
 
         [Benchmark(Description = "MemoryStream", Baseline = true)]
         public void MemStreamTests()
         {
             using (MemoryStream TestStream = new MemoryStream())
             {
-                TestStream.Write(Buffer, 0, Size);
+                TestStream.Write(Buffer, 0, Count);
                 var Result = TestStream.ToArray();
             }
         }
@@ -28,7 +26,7 @@ namespace LibraryTests.Tests
         {
             using (var TestStream = Manager.GetStream())
             {
-                TestStream.Write(Buffer, 0, Size);
+                TestStream.Write(Buffer, 0, Count);
                 var Result = TestStream.ToArray();
             }
         }
@@ -36,7 +34,7 @@ namespace LibraryTests.Tests
         [GlobalSetup]
         public void SetUp()
         {
-            Buffer = new byte[Size];
+            Buffer = new byte[Count];
             Manager = new RecyclableMemoryStreamManager();
         }
     }

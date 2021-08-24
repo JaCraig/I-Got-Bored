@@ -1,8 +1,9 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 
 namespace LibraryTests.Tests
 {
-    public class ClassVsStructAccess
+    public class ClassVsStructAccess : TestBaseClass
     {
         private TestClass TempClass = new TestClass();
         private TestStruct TempStruct = new TestStruct();
@@ -10,7 +11,7 @@ namespace LibraryTests.Tests
         [Benchmark(Baseline = true, Description = "Class test")]
         public void ClassTest()
         {
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Value = TempClass.Data;
             }
@@ -19,7 +20,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Struct test")]
         public void StructTest()
         {
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Value = TempStruct.Data;
             }

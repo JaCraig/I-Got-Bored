@@ -1,15 +1,12 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LibraryTests.Tests
 {
-    [MemoryDiagnoser, RankColumn]
-    public class StringConcatTests
+    public class StringConcatTests : TestBaseClass
     {
-        [Params(100, 1000, 10000, 100000)]
-        public int Count { get; set; }
-
         [Benchmark(Description = "char list concat")]
         public string CharConcat()
         {

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace LibraryTests.Tests
 {
-    [MemoryDiagnoser]
+    [MemoryDiagnoser, AllStatisticsColumn, RankColumn, RPlotExporter]
     public class ReflectionCachingTests
     {
         private static ConcurrentDictionary<Type, PropertyInfo[]> ConcurrentDictionary;

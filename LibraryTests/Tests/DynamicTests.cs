@@ -1,14 +1,15 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 
 namespace LibraryTests.Tests
 {
-    public class DynamicTests
+    public class DynamicTests : TestBaseClass
     {
         [Benchmark(Baseline = true, Description = "Dynamic value")]
         public void Dynamic()
         {
             dynamic Test = new TestClass();
-            for (var x = 0; x < 1000; ++x)
+            for (var x = 0; x < Count; ++x)
             {
                 string Value = Test.Value;
             }
@@ -18,7 +19,7 @@ namespace LibraryTests.Tests
         public void DynamicWithCasting()
         {
             dynamic Test = new TestClass();
-            for (var x = 0; x < 1000; ++x)
+            for (var x = 0; x < Count; ++x)
             {
                 string Value = ((TestClass)Test).Value;
             }
@@ -28,7 +29,7 @@ namespace LibraryTests.Tests
         public void StaticTyping()
         {
             var Test = new TestClass();
-            for (var x = 0; x < 1000; ++x)
+            for (var x = 0; x < Count; ++x)
             {
                 string Value = Test.Value;
             }

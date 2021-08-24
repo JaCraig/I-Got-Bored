@@ -4,6 +4,7 @@ using System.Text;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, AllStatisticsColumn, RankColumn, RPlotExporter]
     public class StringFormatting
     {
         private readonly DateTime Now = DateTime.Now;

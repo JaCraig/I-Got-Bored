@@ -2,6 +2,7 @@
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, AllStatisticsColumn, RankColumn, RPlotExporter]
     public class PatternMatchingTests
     {
         [Benchmark(Description = "As")]

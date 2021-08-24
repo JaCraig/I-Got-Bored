@@ -1,11 +1,12 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace LibraryTests.Tests
 {
-    public class PartitionedParallel
+    public class PartitionedParallel : TestBaseClass
     {
         private byte[] Data;
 
@@ -59,7 +60,7 @@ namespace LibraryTests.Tests
         [GlobalSetup]
         public void Setup()
         {
-            Data = new byte[100000];
+            Data = new byte[Count];
         }
     }
 }

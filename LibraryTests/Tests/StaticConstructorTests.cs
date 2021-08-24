@@ -1,14 +1,15 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System;
 
 namespace LibraryTests.Tests
 {
-    public class StaticConstructorTests
+    public class StaticConstructorTests : TestBaseClass
     {
         [Benchmark(Baseline = true, Description = "No constructor")]
         public void WithoutStaticConstructor()
         {
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Value = NoConstructor.Number;
             }
@@ -17,7 +18,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "With constructor")]
         public void WithStaticConstructor()
         {
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Value = Constructor.Number;
             }

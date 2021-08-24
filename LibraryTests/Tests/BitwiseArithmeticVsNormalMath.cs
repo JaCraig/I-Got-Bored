@@ -1,14 +1,15 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 
 namespace LibraryTests.Tests
 {
-    public class BitwiseVsNormalDivision
+    public class BitwiseVsNormalDivision : TestBaseClass
     {
         [Benchmark(Description = "Bitwise Division")]
         public void BitwiseDivision()
         {
             var Value = 274162;
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Result = Value << 1;
             }
@@ -18,7 +19,7 @@ namespace LibraryTests.Tests
         public void NormalDivision()
         {
             var Value = 274162;
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Result = Value / 2;
             }

@@ -1,13 +1,11 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System;
 
 namespace LibraryTests.Tests
 {
-    public class ArrayCopyTests
+    public class ArrayCopyTests : TestBaseClass
     {
-        [Params(100, 1000, 10000)]
-        public int Count { get; set; }
-
         private byte[] source, destination;
 
         [Benchmark(Baseline = true, Description = "Copy using Array.Copy()")]

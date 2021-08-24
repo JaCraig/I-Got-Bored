@@ -3,6 +3,7 @@ using System;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, AllStatisticsColumn, RankColumn, RPlotExporter]
     public class EnumVsBytePacking
     {
         [Benchmark(Description = "Byte")]

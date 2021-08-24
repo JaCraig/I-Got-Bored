@@ -1,10 +1,11 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace LibraryTests.Tests
 {
-    public class ListInterfaceIteration
+    public class ListInterfaceIteration : TestBaseClass
     {
         public List<int> Data;
 
@@ -142,7 +143,7 @@ namespace LibraryTests.Tests
         public void Setup()
         {
             Data = new List<int>();
-            for (int x = 0; x < 100000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 Data.Add(x);
             }

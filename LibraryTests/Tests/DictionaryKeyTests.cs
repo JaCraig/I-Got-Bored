@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, AllStatisticsColumn, RankColumn, RPlotExporter]
     public class DictionaryKeyTests
     {
         [Benchmark(Description = "Dictionary<int,string>")]

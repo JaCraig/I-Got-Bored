@@ -1,18 +1,19 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System;
 using System.Buffers;
 
 namespace LibraryTests.Tests
 {
-    public class AllocationStrategyTests
+    public class AllocationStrategyTests : TestBaseClass
     {
         private ColorStruct[] DataPool;
 
         [Benchmark(Baseline = true, Description = "Allocate as needed")]
         public void AllocateAsNeeded()
         {
-            ColorStruct[] Items = new ColorStruct[10000];
-            for (int x = 0; x < 10000; ++x)
+            ColorStruct[] Items = new ColorStruct[Count];
+            for (int x = 0; x < Count; ++x)
             {
                 ColorStruct Item = Items[x];
                 Item.Alpha = 1;
@@ -26,8 +27,8 @@ namespace LibraryTests.Tests
         public void ArrayPoolTest()
         {
             var Pool = ArrayPool<ColorStruct>.Shared;
-            var Items = Pool.Rent(10000);
-            for (int x = 0; x < 10000; ++x)
+            var Items = Pool.Rent(Count);
+            for (int x = 0; x < Count; ++x)
             {
                 ColorStruct Item = Items[x];
                 Item.Alpha = 1;
@@ -58,7 +59,7 @@ namespace LibraryTests.Tests
         [GlobalSetup]
         public void SetUp()
         {
-            DataPool = new ColorStruct[10000];
+            DataPool = new ColorStruct[Count];
         }
 
         [Benchmark(Description = "Span from preallocated array 'pool'")]

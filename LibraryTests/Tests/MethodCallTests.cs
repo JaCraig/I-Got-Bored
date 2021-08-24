@@ -1,16 +1,17 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System;
 using System.Linq;
 using System.Reflection;
 
 namespace LibraryTests.Tests
 {
-    public class MethodCallTests
+    public class MethodCallTests : TestBaseClass
     {
         [Benchmark(Description = "Direct call to method", Baseline = true)]
         public void DirectCall()
         {
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Result = GetResult();
             }
@@ -19,7 +20,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Func(Method)")]
         public void Func()
         {
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Result = new Func<string>(GetResult)();
             }
@@ -28,7 +29,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Func(_=>_)")]
         public void FuncLambda()
         {
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Result = new Func<string>(() => "A" + "V" + "C")();
             }
@@ -42,7 +43,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Local method")]
         public void LocalFunction()
         {
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Result = GetResultsLocal();
             }
@@ -56,7 +57,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "MethodInfo, cached")]
         public void MethodInfoInvoke()
         {
-            for (int x = 0; x < 1000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Result = MethodCacheFor<MethodCallTests>.Methods[0].Invoke(this, new object[0]);
             }

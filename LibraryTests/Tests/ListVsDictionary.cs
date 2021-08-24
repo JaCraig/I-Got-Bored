@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace LibraryTests.Tests
 {
-    public class ListVsDictionary
+    public class ListVsDictionary : TestBaseClass
     {
         private ArrayList ArrayListData;
         private Collection<TestClass> CollectionData;
@@ -155,7 +156,7 @@ namespace LibraryTests.Tests
             DictionaryData = new Dictionary<string, TestClass>();
             ArrayListData = new ArrayList();
             CollectionData = new Collection<TestClass>();
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 CollectionData.Add(new TestClass { Value = x, Key = x.ToString() });
                 ArrayListData.Add(new TestClass { Value = x, Key = x.ToString() });

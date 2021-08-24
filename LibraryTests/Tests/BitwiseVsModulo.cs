@@ -1,14 +1,15 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 
 namespace LibraryTests.Tests
 {
-    public class BitwiseVsModulo
+    public class BitwiseVsModulo : TestBaseClass
     {
         [Benchmark(Description = "Bitwise Modulo")]
         public void BitwiseMultiplication()
         {
             var Value = 274162;
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Result = Value & 10;
             }
@@ -18,7 +19,7 @@ namespace LibraryTests.Tests
         public void NormalMultiplication()
         {
             var Value = 274162;
-            for (int x = 0; x < 10000; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 var Result = Value % 10;
             }

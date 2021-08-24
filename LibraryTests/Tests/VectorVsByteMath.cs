@@ -1,14 +1,15 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System.Numerics;
 
 namespace LibraryTests.Tests
 {
-    public class VectorVsByteMath
+    public class VectorVsByteMath : TestBaseClass
     {
         [Benchmark(Baseline = true, Description = "byte[] test")]
         public void ByteArrayTest()
         {
-            byte[] ByteArrayObject = new byte[400000];
+            byte[] ByteArrayObject = new byte[Count * 4];
             for (int x = 0; x < ByteArrayObject.Length; ++x)
             {
                 ByteArrayObject[x] += ByteArrayObject[x];
@@ -18,7 +19,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Struct test")]
         public void StructTest()
         {
-            ColorStruct[] StructObject = new ColorStruct[100000];
+            ColorStruct[] StructObject = new ColorStruct[Count];
             for (int x = 0; x < StructObject.Length; ++x)
             {
                 StructObject[x].Red += StructObject[x].Red;
@@ -31,7 +32,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Struct UInt test")]
         public void StructUIntTest()
         {
-            ColorStruct[] StructObject = new ColorStruct[100000];
+            ColorStruct[] StructObject = new ColorStruct[Count];
             for (int x = 0; x < StructObject.Length; ++x)
             {
                 StructObject[x].UIntData += StructObject[x].UIntData;
@@ -41,7 +42,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Vector<byte> test")]
         public void VectorByteTest()
         {
-            byte[] ByteArrayObject = new byte[400000];
+            byte[] ByteArrayObject = new byte[Count * 4];
             var simdLength = Vector<byte>.Count;
             var result = new byte[ByteArrayObject.Length];
             var i = 0;
@@ -59,7 +60,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Vector<float> test")]
         public void VectorFloatTest()
         {
-            float[] FloatArrayObject = new float[100000];
+            float[] FloatArrayObject = new float[Count];
             var simdLength = Vector<float>.Count;
             var result = new float[FloatArrayObject.Length];
             var i = 0;
@@ -77,7 +78,7 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Vector<uint> test")]
         public void VectorUIntTest()
         {
-            uint[] ByteArrayObject = new uint[100000];
+            uint[] ByteArrayObject = new uint[Count];
             var simdLength = Vector<uint>.Count;
             var result = new uint[ByteArrayObject.Length];
             var i = 0;

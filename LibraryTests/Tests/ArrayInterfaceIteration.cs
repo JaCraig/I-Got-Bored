@@ -1,10 +1,11 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace LibraryTests.Tests
 {
-    public class ArrayInterfaceIteration
+    public class ArrayInterfaceIteration : TestBaseClass
     {
         public int[] Data;
 
@@ -141,7 +142,7 @@ namespace LibraryTests.Tests
         [GlobalSetup]
         public void Setup()
         {
-            Data = new int[10000];
+            Data = new int[Count];
         }
     }
 }

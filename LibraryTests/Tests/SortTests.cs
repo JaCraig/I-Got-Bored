@@ -1,19 +1,17 @@
 ﻿using BenchmarkDotNet.Attributes;
 using JM.LinqFaster;
+using LibraryTests.Tests.BaseClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace LibraryTests.Tests
 {
-    public class ArraySortTests
+    public class ArraySortTests : TestBaseClass
     {
         private int[] Data;
 
         private List<int> ListData;
-
-        [Params(10, 100, 1000, 10000, 100000)]
-        public int Size { get; set; }
 
         [Benchmark(Description = "Linq Array.OrderBy()", Baseline = true)]
         public void ArrayOrderBy()
@@ -62,7 +60,7 @@ namespace LibraryTests.Tests
         [GlobalSetup]
         public void SetUp()
         {
-            Data = new int[Size];
+            Data = new int[Count];
             ListData = new List<int>();
             var RandomObj = new Random();
             for (int x = 0; x < Data.Length; ++x)

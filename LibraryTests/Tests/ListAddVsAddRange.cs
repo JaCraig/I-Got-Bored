@@ -1,13 +1,11 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System.Collections.Generic;
 
 namespace LibraryTests.Tests
 {
-    public class ListAddVsAddRange
+    public class ListAddVsAddRange : TestBaseClass
     {
-        [Params(100, 1000, 10000, 100000, 1000000)]
-        public int Length { get; set; }
-
         private List<TestItem> DummyData { get; set; }
 
         [Benchmark(Description = "List<T> AddRange")]
@@ -21,7 +19,7 @@ namespace LibraryTests.Tests
         public void ListTest()
         {
             var Data = new List<TestItem>();
-            for (int x = 0, DataLength = Length; x < DataLength; ++x)
+            for (int x = 0, DataLength = Count; x < DataLength; ++x)
             {
                 Data.Add(DummyData[x]);
             }
@@ -31,7 +29,7 @@ namespace LibraryTests.Tests
         public void Setup()
         {
             DummyData = new List<TestItem>();
-            for (int x = 0; x < Length; ++x)
+            for (int x = 0; x < Count; ++x)
             {
                 DummyData.Add(new TestItem { Name = "a" });
             }

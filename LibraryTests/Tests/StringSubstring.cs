@@ -3,6 +3,7 @@ using System;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, AllStatisticsColumn, RankColumn, RPlotExporter]
     public class StringSubstring
     {
         [Benchmark(Description = "Span.Slice")]

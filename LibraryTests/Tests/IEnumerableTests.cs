@@ -1,33 +1,21 @@
 ﻿using BenchmarkDotNet.Attributes;
+using LibraryTests.Tests.BaseClasses;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace LibraryTests.Tests
 {
-    public class IEnumerableTests
+    public class IEnumerableTests : TestBaseClass
     {
-        public IEnumerableTests()
-        {
-            ListData = new List<int>();
-            ArrayData = new int[10000];
-            BagData = new ConcurrentBag<int>();
-            HashSetData = new HashSet<int>();
-            ArrayListData = new ArrayList();
-            for (int x = 0; x < 10000; ++x)
-            {
-                ArrayListData.Add(x);
-                BagData.Add(x);
-                ListData.Add(x);
-                HashSetData.Add(x);
-            }
-        }
-
         public int[] ArrayData { get; set; }
+
         public ArrayList ArrayListData { get; set; }
+
         public ConcurrentBag<int> BagData { get; set; }
 
         public HashSet<int> HashSetData { get; set; }
+
         public List<int> ListData { get; set; }
 
         [Benchmark(Description = "ArrayList test")]
@@ -58,6 +46,23 @@ namespace LibraryTests.Tests
         public void ListTest()
         {
             foreach (var Item in ListData) { }
+        }
+
+        [GlobalSetup]
+        public void Setup()
+        {
+            ListData = new List<int>();
+            ArrayData = new int[Count];
+            BagData = new ConcurrentBag<int>();
+            HashSetData = new HashSet<int>();
+            ArrayListData = new ArrayList();
+            for (int x = 0; x < Count; ++x)
+            {
+                ArrayListData.Add(x);
+                BagData.Add(x);
+                ListData.Add(x);
+                HashSetData.Add(x);
+            }
         }
     }
 }

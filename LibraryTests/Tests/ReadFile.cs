@@ -3,6 +3,7 @@ using System.IO;
 
 namespace LibraryTests.Tests
 {
+    [MemoryDiagnoser, AllStatisticsColumn, RankColumn, RPlotExporter]
     public class ReadFile
     {
         private static string InputPath => "../../../../../../../Formats/Text/File.txt";
