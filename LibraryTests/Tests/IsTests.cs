@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BigBook;
-using BigBook.Registration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LibraryTests.Tests
 {
@@ -37,7 +37,7 @@ namespace LibraryTests.Tests
         public void Setup()
         {
             Data = new TestClass[100];
-            Canister.Builder.CreateContainer(null).RegisterBigBookOfDataTypes().Build();
+            new ServiceCollection().AddCanisterModules();
         }
 
         private interface ITestClass
