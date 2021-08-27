@@ -79,7 +79,7 @@ namespace LibraryTests.Tests
             {
                 TempData.Add(x);
             }
-            Data = TempData.Where(x => x > Taking);
+            Data = TempData.Where(x => x > Taking / 2);
         }
     }
 }

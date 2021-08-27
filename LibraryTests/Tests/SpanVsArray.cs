@@ -6,15 +6,17 @@ namespace LibraryTests.Tests
 {
     public class SpanVsArray : TestBaseClass
     {
+        private int LineLength;
+
         [Benchmark(Baseline = true, Description = "Array")]
         public unsafe void ArrayTest()
         {
             int[] Data = new int[Count];
-            for (int y = 0; y < Count / 10; ++y)
+            for (int y = 0; y < LineLength; ++y)
             {
-                for (int x = 0; x < Count / 10; ++x)
+                for (int x = 0; x < LineLength; ++x)
                 {
-                    Data[(y * (Count / 10)) + x] = 1;
+                    Data[(y * (LineLength)) + x] = 1;
                 }
             }
         }
@@ -26,10 +28,10 @@ namespace LibraryTests.Tests
             fixed (int* OriginalPointer = &Data[0])
             {
                 int* Pointer = OriginalPointer;
-                for (int y = 0; y < Count / 10; ++y)
+                for (int y = 0; y < LineLength; ++y)
                 {
-                    Pointer = OriginalPointer + (y * (Count / 10));
-                    for (int x = 0; x < Count / 10; ++x)
+                    Pointer = OriginalPointer + (y * (LineLength));
+                    for (int x = 0; x < LineLength; ++x)
                     {
                         *Pointer = 1;
                         ++Pointer;
@@ -38,14 +40,20 @@ namespace LibraryTests.Tests
             }
         }
 
+        [GlobalSetup]
+        public void Setup()
+        {
+            LineLength = (int)Math.Sqrt((double)Count);
+        }
+
         [Benchmark(Description = "Span")]
         public unsafe void SpanTest()
         {
             Span<int> Temp = new int[Count];
-            for (int y = 0; y < Count / 10; ++y)
+            for (int y = 0; y < LineLength; ++y)
             {
-                var YPos = y * Count / 10;
-                for (int x = 0; x < Count; ++x)
+                var YPos = y * LineLength;
+                for (int x = 0; x < LineLength; ++x)
                 {
                     Temp[YPos + x] = 1;
                 }
@@ -56,10 +64,10 @@ namespace LibraryTests.Tests
         public unsafe void SpanWithSliceTest()
         {
             Span<int> Temp = new int[Count];
-            for (int y = 0; y < Count / 10; ++y)
+            for (int y = 0; y < LineLength; ++y)
             {
-                var Slice = Temp.Slice(y * (Count / 10), Count / 10);
-                for (int x = 0; x < Count / 10; ++x)
+                var Slice = Temp.Slice(y * (LineLength), LineLength);
+                for (int x = 0; x < LineLength; ++x)
                 {
                     Slice[x] = 1;
                 }

@@ -26,7 +26,7 @@ namespace LibraryTests.Tests
             for (int x = 0; x < ArrayListData.Count; ++x)
             {
                 TestClass TempValue = (TestClass)ArrayListData[x];
-                if (TempValue.Key == "100")
+                if (TempValue.Key == "99")
                 {
                     Value = TempValue;
                     break;
@@ -37,13 +37,13 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Collection.First")]
         public void CollectionFirst()
         {
-            var Value = CollectionData.First(x => x.Key == "100");
+            var Value = CollectionData.First(x => x.Key == "99");
         }
 
         [Benchmark(Description = "Collection.FirstOrDefault")]
         public void CollectionFirstOrDefault()
         {
-            var Value = CollectionData.FirstOrDefault(x => x.Key == "100");
+            var Value = CollectionData.FirstOrDefault(x => x.Key == "99");
         }
 
         [Benchmark(Description = "Collection for loop")]
@@ -52,7 +52,7 @@ namespace LibraryTests.Tests
             TestClass Value = null;
             for (int x = 0; x < CollectionData.Count; ++x)
             {
-                if (CollectionData[x].Key == "100")
+                if (CollectionData[x].Key == "99")
                 {
                     Value = CollectionData[x];
                     break;
@@ -63,49 +63,49 @@ namespace LibraryTests.Tests
         [Benchmark(Description = "Dictionary[]")]
         public void Dictionary()
         {
-            var Value = DictionaryData["100"];
+            var Value = DictionaryData["99"];
         }
 
         [Benchmark(Description = "Dictionary.TryGetValue")]
         public void DictionaryTryGetValue()
         {
-            DictionaryData.TryGetValue("100", out TestClass Value);
+            DictionaryData.TryGetValue("99", out TestClass Value);
         }
 
         [Benchmark(Description = "HashSet.First")]
         public void HashSetFirst()
         {
-            var Value = HashData.First(x => x.Key == "100");
+            var Value = HashData.First(x => x.Key == "99");
         }
 
         [Benchmark(Description = "HashSet.FirstOrDefault")]
         public void HashSetFirstOrDefault()
         {
-            var Value = HashData.FirstOrDefault(x => x.Key == "100");
+            var Value = HashData.FirstOrDefault(x => x.Key == "99");
         }
 
         [Benchmark(Description = "ImmutableDictionary[]")]
         public void ImmutableDictionary()
         {
-            var Value = ImmutableDictionaryData["100"];
+            var Value = ImmutableDictionaryData["99"];
         }
 
         [Benchmark(Description = "ImmutableDictionary.TryGetValue")]
         public void ImmutableDictionaryTryGetValue()
         {
-            ImmutableDictionaryData.TryGetValue("100", out TestClass Value);
+            ImmutableDictionaryData.TryGetValue("99", out TestClass Value);
         }
 
         [Benchmark(Description = "ImmutableList.First")]
         public void ImmutableListFirst()
         {
-            var Value = ImmutableListData.First(x => x.Key == "100");
+            var Value = ImmutableListData.First(x => x.Key == "99");
         }
 
         [Benchmark(Description = "ImmutableList.FirstOrDefault")]
         public void ImmutableListFirstOrDefault()
         {
-            var Value = ImmutableListData.FirstOrDefault(x => x.Key == "100");
+            var Value = ImmutableListData.FirstOrDefault(x => x.Key == "99");
         }
 
         [Benchmark(Description = "ImmutableList for loop")]
@@ -114,7 +114,7 @@ namespace LibraryTests.Tests
             TestClass Value = null;
             for (int x = 0; x < ImmutableListData.Count; ++x)
             {
-                if (ImmutableListData[x].Key == "100")
+                if (ImmutableListData[x].Key == "99")
                 {
                     Value = ImmutableListData[x];
                     break;
@@ -125,13 +125,13 @@ namespace LibraryTests.Tests
         [Benchmark(Baseline = true, Description = "List.First")]
         public void ListFirst()
         {
-            var Value = ListData.First(x => x.Key == "100");
+            var Value = ListData.First(x => x.Key == "99");
         }
 
         [Benchmark(Description = "List.FirstOrDefault")]
         public void ListFirstOrDefault()
         {
-            var Value = ListData.FirstOrDefault(x => x.Key == "100");
+            var Value = ListData.FirstOrDefault(x => x.Key == "99");
         }
 
         [Benchmark(Description = "List for loop")]
@@ -140,7 +140,7 @@ namespace LibraryTests.Tests
             TestClass Value = null;
             for (int x = 0; x < ListData.Count; ++x)
             {
-                if (ListData[x].Key == "100")
+                if (ListData[x].Key == "99")
                 {
                     Value = ListData[x];
                     break;
