@@ -1,4 +1,5 @@
-﻿using FileCurator;
+﻿using BigBook;
+using FileCurator;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Text;
@@ -22,10 +23,21 @@ namespace ResultBuilder
                 var Data = File.Read();
                 var Table = HeaderData.Match(Data).Groups["Table"].Value;
                 Header = HeaderData.Match(Data).Groups["Header"].Value;
-                TableBuilder.AppendLine($"**{File.Name}**").AppendLine().AppendLine(Table).AppendLine("----------");
+                TableBuilder.AppendLine($"**{SplitCamelCase(File.Name)}**").AppendLine().AppendLine(Table).AppendLine("----------");
             }
             Builder.AppendLine($"```{Header}```").AppendLine(TableBuilder.ToString());
             FinalFile.Write(Builder.ToString());
+        }
+
+        /// <summary>
+        /// Splits the camel case.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>Splits the camel case names</returns>
+        private static string SplitCamelCase(string? input)
+        {
+            input = input.Replace("LibraryTests.Tests.", "").Replace("-report-github.md", "");
+            return input?.AddSpaces() ?? "";
         }
     }
 }

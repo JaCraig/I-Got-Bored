@@ -5,7 +5,7 @@ using System.Linq;
 namespace LibraryTests.Tests
 {
     [MemoryDiagnoser, HtmlExporter, MarkdownExporter]
-    public class ListvsYield
+    public class ListVsYield
     {
         [Benchmark(Baseline = true)]
         public void List()

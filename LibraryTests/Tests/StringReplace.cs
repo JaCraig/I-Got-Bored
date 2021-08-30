@@ -39,6 +39,6 @@ namespace LibraryTests.Tests
         }
 
         [Benchmark]
-        public void StringConcat() => _ = Value.Replace("A", "C", StringComparison.Ordinal);
+        public void StringReplaceMethod() => _ = Value.Replace("A", "C", StringComparison.Ordinal);
     }
 }

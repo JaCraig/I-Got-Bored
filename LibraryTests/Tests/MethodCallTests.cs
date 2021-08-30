@@ -8,6 +8,28 @@ namespace LibraryTests.Tests
 {
     public class MethodCallTests : TestBaseClass
     {
+        private static Func<string> CachedFunc;
+
+        private static Func<string> CachedLambda = () => "A" + "V" + "C";
+
+        [Benchmark(Description = "Func(_=>_)")]
+        public void CachedFuncLambda()
+        {
+            for (int x = 0; x < Count; ++x)
+            {
+                var Result = CachedLambda();
+            }
+        }
+
+        [Benchmark(Description = "Func(Method)")]
+        public void CachedFuncTest()
+        {
+            for (int x = 0; x < Count; ++x)
+            {
+                var Result = CachedFunc();
+            }
+        }
+
         [Benchmark(Description = "Direct call to method", Baseline = true)]
         public void DirectCall()
         {
@@ -17,7 +39,7 @@ namespace LibraryTests.Tests
             }
         }
 
-        [Benchmark(Description = "Func(Method)")]
+        [Benchmark(Description = "new Func(Method)")]
         public void Func()
         {
             for (int x = 0; x < Count; ++x)
@@ -26,7 +48,7 @@ namespace LibraryTests.Tests
             }
         }
 
-        [Benchmark(Description = "Func(_=>_)")]
+        [Benchmark(Description = "new Func(_=>_)")]
         public void FuncLambda()
         {
             for (int x = 0; x < Count; ++x)
@@ -61,6 +83,12 @@ namespace LibraryTests.Tests
             {
                 var Result = MethodCacheFor<MethodCallTests>.Methods[0].Invoke(this, new object[0]);
             }
+        }
+
+        [GlobalSetup]
+        public void Setup()
+        {
+            CachedFunc = new Func<string>(GetResult);
         }
 
         private static class MethodCacheFor<T> where T : class
