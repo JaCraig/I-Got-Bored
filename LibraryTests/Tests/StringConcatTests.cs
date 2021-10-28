@@ -7,6 +7,8 @@ namespace LibraryTests.Tests
 {
     public class StringConcatTests : TestBaseClass
     {
+        private string[] Values;
+
         [Benchmark(Description = "char list concat")]
         public string CharConcat()
         {
@@ -19,6 +21,16 @@ namespace LibraryTests.Tests
                 Builder.Add('F');
             }
             return new string(Builder.ToArray());
+        }
+
+        [GlobalSetup]
+        public void Setup()
+        {
+            Values = new string[Count];
+            for (var x = 0; x < Count; ++x)
+            {
+                Values[x] = "ASDF";
+            }
         }
 
         [Benchmark(Description = "StringBuilder")]
@@ -41,6 +53,18 @@ namespace LibraryTests.Tests
                 Builder += "ASDF";
             }
             return Builder;
+        }
+
+        [Benchmark(Description = "string.concat", Baseline = true)]
+        public string StringDotConcat()
+        {
+            return string.Concat(Values);
+        }
+
+        [Benchmark(Description = "string.join", Baseline = true)]
+        public string StringJoin()
+        {
+            return string.Join("", Values);
         }
     }
 }
