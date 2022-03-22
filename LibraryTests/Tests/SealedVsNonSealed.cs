@@ -12,25 +12,25 @@ namespace LibraryTests.Tests
         private readonly NotVirtual NotVirtualType = new();
         private readonly SealedType SealedType = new();
 
-        [Benchmark]
+        [Benchmark(Description = "Derives from abstract class, not sealed")]
         public void Abstract()
         {
             AbstractType.Method();
         }
 
-        [Benchmark]
+        [Benchmark(Description = "Derives from abstract class, sealed")]
         public void AbstractSealed()
         {
             AbstractSealedType.Method();
         }
 
-        [Benchmark]
+        [Benchmark(Description = "Derives from class, not sealed. Virtual method.")]
         public void NonSealed()
         {
             NonSealedType.Method();
         }
 
-        [Benchmark(Baseline = true)]
+        [Benchmark(Baseline = true, Description = "Normal class: not virtual or abstract.")]
         public void NotVirtual()
         {
             for (var x = 0; x < Count; ++x)
@@ -39,7 +39,7 @@ namespace LibraryTests.Tests
             }
         }
 
-        [Benchmark(Description = "Normal class ")]
+        [Benchmark(Description = "Normal sealed class: not virtual or abstract.")]
         public void NotVirtualSealed()
         {
             for (var x = 0; x < Count; ++x)
@@ -48,7 +48,7 @@ namespace LibraryTests.Tests
             }
         }
 
-        [Benchmark]
+        [Benchmark(Description = "Derives from class, sealed. Virtual method.")]
         public void Sealed()
         {
             SealedType.Method();
