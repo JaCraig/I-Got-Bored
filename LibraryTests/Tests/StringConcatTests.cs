@@ -55,13 +55,13 @@ namespace LibraryTests.Tests
             return Builder;
         }
 
-        [Benchmark(Description = "string.concat", Baseline = true)]
+        [Benchmark(Description = "string.concat")]
         public string StringDotConcat()
         {
             return string.Concat(Values);
         }
 
-        [Benchmark(Description = "string.join", Baseline = true)]
+        [Benchmark(Description = "string.join")]
         public string StringJoin()
         {
             return string.Join("", Values);

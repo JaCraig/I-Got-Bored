@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FileCurator" Version="3.1.37" />
+    <PackageReference Include="FileCurator" Version="3.1.41" />
   </ItemGroup>
 
 </Project>
