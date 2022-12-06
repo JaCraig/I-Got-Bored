@@ -39,6 +39,12 @@ namespace LibraryTests.Tests
         }
 
         [Benchmark]
-        public void StringReplaceMethod() => _ = Value.Replace("A", "C", StringComparison.Ordinal);
+        public void StringReplaceMethod()
+        {
+            for (var x = 0; x < Count; ++x)
+            {
+                _ = Value.Replace("A", "C", StringComparison.Ordinal);
+            }
+        }
     }
 }
